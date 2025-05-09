@@ -12,8 +12,8 @@ pub(crate) struct Config {
     input_filename: String,
     /// 输出结果文件名，将输出到程序所在目录；若文件已存在，则覆盖
     output_filename: String,
-    /// 词的字数（范围为1-255）
-    pub(crate) word_length: u8,
+    /// 词的字数
+    pub(crate) word_length: usize,
     /// 词频阈值：低于此值的词将被忽略
     pub(crate) freq_threshold: usize,
     /// 字符过滤方式：false则使用UTF-8值范围和额外字符，true则使用正则表达式
@@ -45,7 +45,7 @@ impl Config {
             .par_bridge()
             .for_each(|line| match line {
                 Ok(line) => op(line),
-                Err(e) => eprintln!("读取输入文件时出错：{e}"),
+                _ => {}
             }))
     }
 
@@ -60,7 +60,9 @@ impl Config {
         output_file.write_all(bytes).context("无法写入输出结果文件")
     }
 
-    pub(crate) fn get_judge_char_func(&self) -> Result<Box<dyn Fn(char) -> bool + '_>, Error> {
+    pub(crate) fn get_judge_char_func(
+        &self,
+    ) -> Result<Box<dyn Fn(char) -> bool + Sync + '_>, Error> {
         if self.use_regex {
             let regex = regex::Regex::new(&self.regex).context("正则表达式格式错误")?;
             Ok(Box::new(move |c: char| regex.is_match(&c.to_string())))

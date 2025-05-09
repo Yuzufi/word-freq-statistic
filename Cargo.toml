@@ -2,5 +2,16 @@
 name = "word_freq_statistic"
 version = "0.1.0"
 edition = "2024"
+authors = ["Garth TB <g-art-h@outlook.com>"]
+description = "A Rust application to analyze word frequency in a text file."
+keywords = ["rust", "word-frequency", "text-analysis", "statistics", "nlp"]
+repository = "https://github.com/GarthTB/word-freq-statistic"
+categories = ["command-line-utilities"]
+license = "Apache-2.0"
+readme = "README.md"
 
 [dependencies]
+dashmap = "7.0.0-rc2"
+rayon = "1.10.0"
+serde = { version = "1.0.219", features = ["derive"] }
+toml = "0.8.22"

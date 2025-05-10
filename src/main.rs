@@ -11,7 +11,7 @@ fn main() {
 
     match core::run() {
         Ok(_) => println!("程序成功执行完毕！"),
-        Err(e) => println!("程序出错，已中断！详细信息：\n{:?}", e),
+        Err(e) => println!("程序出错，已中断！错误：{:?}", e),
     }
 
     println!("按回车键退出...");

@@ -19,9 +19,9 @@ pub(crate) struct Config {
     /// 字符过滤方式：false则使用UTF-8值范围和额外字符，true则使用正则表达式
     use_regex: bool,
     /// UTF-8值范围下限：19968即\u4e00，即"一"字，会被包含
-    lower_limit: usize,
+    lower_limit: u32,
     /// UTF-8值范围上限：40959即\u9fff，即"鿿"字，会被包含
-    upper_limit: usize,
+    upper_limit: u32,
     /// UTF-8值范围外的额外字符，如逗号、句号、空格、生僻字等
     extra_chars: String,
     /// 正则表达式；若use_regex为false，则忽略此项
@@ -70,15 +70,15 @@ impl Config {
             let extra_chars: HashSet<char> = self
                 .extra_chars
                 .chars()
-                .filter(|c| (*c as usize) < self.lower_limit || (*c as usize) > self.upper_limit)
+                .filter(|c| (*c as u32) < self.lower_limit || (*c as u32) > self.upper_limit)
                 .collect();
             if extra_chars.is_empty() {
                 Ok(Box::new(|c: char| {
-                    (c as usize) >= self.lower_limit && (c as usize) <= self.upper_limit
+                    (c as u32) >= self.lower_limit && (c as u32) <= self.upper_limit
                 }))
             } else {
                 Ok(Box::new(move |c: char| {
-                    (c as usize) >= self.lower_limit && (c as usize) <= self.upper_limit
+                    (c as u32) >= self.lower_limit && (c as u32) <= self.upper_limit
                         || extra_chars.contains(&c)
                 }))
             }

